@@ -1,23 +1,18 @@
 import React, { Component } from 'react';
 import{ createBottomTabNavigator } from'react-navigation';
 import{ Ionicons }  from'@expo/vector-icons';
-import SearchScreen from '../screens/SearchScreen/SearchScreen';
-import FavoritesScreen from '../screens/FavoritesScreen/FavoritesScreen';
-import CartScreen from '../screens/CartScreen/CartScreen';
 import ResultNav from './ResultsNav';
 import { theme } from '../constants/colors'
+import FavoritesNav from './FavoritesNav';
+import CartMapNav from './CartMapNav';
+import { AsyncStorage } from 'react-native';
 
 const AppNav = createBottomTabNavigator({
   Search: {screen: ResultNav},
-  Favorites: {screen: FavoritesScreen},
-  Cart: {screen: CartScreen}
+  Favorites: {screen: FavoritesNav},
+  Cart: {screen: CartMapNav}
 }, 
-{
-  // tabBarOptions: {
-  //   activeTintColor: theme.black,
-  //   activeBackgroundColor: theme.yellow,
-  //   inactiveBackgroundColor: theme.yellow,
-  // },
+{ lazy: false,
   navigationOptions: ({navigation}) => {
     return {tabBarIcon: ({tintColor}) => {
       const { routeName } = navigation.state 

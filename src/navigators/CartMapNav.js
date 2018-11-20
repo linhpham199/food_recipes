@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import CartScreen from '../screens/CartScreen/CartScreen';
+import MapScreen from '../screens/MapScreen/MapScreen';
 import { createStackNavigator } from 'react-navigation';
-import SearchScreen from '../screens/SearchScreen/SearchScreen';
-import DetailsScreen from '../screens/DetailsScreen/DetailsScreen';
 import { theme } from '../constants/colors';
+import DetailsScreen from '../screens/DetailsScreen/DetailsScreen';
 
-const ResultNav = createStackNavigator({
-  Search: {screen: SearchScreen},
-  Details: {screen: DetailsScreen}
+const CartNav = createStackNavigator({
+  Cart: {screen: CartScreen},
+  Map: {screen: MapScreen},
 }, {
   navigationOptions: {
     // header: null,
@@ -23,12 +24,12 @@ const ResultNav = createStackNavigator({
   },
 })
 
-class ResultsNav extends Component {
+class CartMapNav extends Component {
   render() {
     return (
-      <ResultNav />
+      <CartNav />
     );
   }
 }
 
-export default ResultsNav;
+export default CartMapNav;

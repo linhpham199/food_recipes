@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { createStackNavigator } from 'react-navigation';
-import SearchScreen from '../screens/SearchScreen/SearchScreen';
+import FavoritesScreen from '../screens/FavoritesScreen/FavoritesScreen';
 import DetailsScreen from '../screens/DetailsScreen/DetailsScreen';
+import {createStackNavigator } from 'react-navigation';
 import { theme } from '../constants/colors';
+import { AsyncStorage } from 'react-native';
 
-const ResultNav = createStackNavigator({
-  Search: {screen: SearchScreen},
+const FavNav = createStackNavigator({
+  Favorites: {screen: FavoritesScreen},
   Details: {screen: DetailsScreen}
 }, {
   navigationOptions: {
@@ -23,12 +24,12 @@ const ResultNav = createStackNavigator({
   },
 })
 
-class ResultsNav extends Component {
+class FavoritesNav extends Component {
   render() {
     return (
-      <ResultNav />
+    <FavNav />
     );
   }
 }
 
-export default ResultsNav;
+export default FavoritesNav;
