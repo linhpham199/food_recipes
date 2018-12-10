@@ -51,7 +51,7 @@ export default class RecipeResult extends Component {
         renderPlaceholder={this._renderPlaceholder}
         data={this.state.data}
         itemsPerRow={2}
-        // backgroundColor={theme.lightBlue} 
+        onEndReached={this.props.onEndReached}
       />
     );
   }

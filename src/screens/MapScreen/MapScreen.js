@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, KeyboardAvoidingView, TextInput, TouchableOpacity, View } from 'react-native';
+import { Text, StyleSheet, KeyboardAvoidingView, TextInput, TouchableOpacity, View, Alert } from 'react-native';
 import { MapView, Location, Permissions } from 'expo';
 import { googleAPIkey } from '../../constants/APIkey';
 import { theme } from '../../constants/colors';
@@ -29,6 +29,7 @@ class MapScreen extends Component {
       Alert.alert('No permission to access location');
     } else {
       let location = await Location.getCurrentPositionAsync({});
+      console.log(location)
       this.setState({
         region: {...this.state.region, latitude: location.coords.latitude, longitude: location.coords.longitude}
       }, () => this.showMarkets())
@@ -47,6 +48,7 @@ class MapScreen extends Component {
             latitude: parseFloat(responseJSON.results[0].geometry.location.lat),
             longitude: parseFloat(responseJSON.results[0].geometry.location.lng),
           }
+          console.log(region)
           this.setState({ region }, () => this.showMarkets())
           
         }

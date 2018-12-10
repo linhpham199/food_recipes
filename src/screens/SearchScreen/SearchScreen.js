@@ -5,11 +5,14 @@ import RecipeResult from '../../components/recipe/RecipeResult';
 import { Header } from 'react-native-elements';
 import { foodAPIid, foodAPIkey } from '../../constants/APIkey';
 
+let end = 10
+
 export default class SearchScreen extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
+      input: '',
       recipes: [],
       recipe: {
         label: '',
@@ -28,13 +31,8 @@ export default class SearchScreen extends React.Component {
     this.getRecipe('Dumpling')
   }
 
-  getRecipe = (input) => {
-
-    this.setState({
-      recipes: []
-    })
-
-    fetch(`https://api.edamam.com/search?q=${input}&app_id=${foodAPIid}&app_key=${foodAPIkey}`)
+  fetchRecipe = (input) => {
+    fetch(`https://api.edamam.com/search?q=${input}&app_id=${foodAPIid}&app_key=${foodAPIkey}&from=0&to=${end}`)
     .then(resData => resData.json())
     .then(data => {
       data.hits.map(rep => {
@@ -50,9 +48,27 @@ export default class SearchScreen extends React.Component {
         })
         this.setState({
           recipes: [...this.state.recipes, this.state.recipe]
-        })
+        })   
       })
     })
+    console.log(end)
+  }
+
+  getRecipe = (input) => {
+    this.setState({
+      recipes: [],
+      input,
+    })
+
+    end = 10
+
+    this.fetchRecipe(input)
+    
+  }
+
+  loadMoreRecipe = () => {
+    end = end + 10
+    this.fetchRecipe(this.state.input)
   }
 
   render() {
@@ -63,6 +79,7 @@ export default class SearchScreen extends React.Component {
         <RecipeResult
           data={this.state.recipes}
           navigation={this.props.navigation}
+          onEndReached={this.loadMoreRecipe}
         />
       </View>
     );

@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, AsyncStorage, TouchableOpacity } from 'react-na
 import { theme } from '../../constants/colors';
 import{ Ionicons }  from'@expo/vector-icons';
 import { retrieveStorage, updateStorage } from '../../utils/asyncStorage';
+import * as storage from '../../constants/storage';
 
 class RecipeListItem extends Component {
   constructor(props) {
